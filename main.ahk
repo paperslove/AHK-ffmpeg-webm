@@ -106,7 +106,6 @@ Gosub SoundCheck
 Gui 1:Submit, NoHide
 gosub cropfix
 Run %ffmpeg% -i "%origin%" %croppingS% %croppingE% -c:v libvpx -crf %quality% -b:v %rate%K -vf scale=%width%:-1  %sound% output.webm
-;Run %location% -i %origin% 
 Return
 
 cropfix:
