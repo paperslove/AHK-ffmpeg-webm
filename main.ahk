@@ -1,5 +1,4 @@
 #NoEnv
-;#Warn ;gotta push this to release state lol
 #SingleInstance, Force
 #Persistent
 SetBatchLines -1
@@ -14,8 +13,6 @@ StartTime = %null%
 EndTime = %null%
 croppingS = %null%
 croppingE = %null%
-
-
 FileRead ffmpeg, ~settings.tmp
 
 Gui 1:Add, Edit, r1 w275 y10 vFilenamedisplay, abcdefghijklmnopqrstuvwxyz0123456789 %origin%
@@ -25,7 +22,6 @@ Gui 1:Add, Edit, x15 w80 +ReadOnly r1 vStartTime, 00:00:01
 Gui 1:Add, Text, y+-18 x+5, Start cut. hh:mm:ss[.xxx]
 Gui 1:Add, Edit, x15 w80 +ReadOnly r1 vEndTime, 00:00:10
 Gui 1:Add, Text, y+-18 x+5, End cut. hh:mm:ss[.xxx]
-
 Gui 1:Add, Edit, x15 w80
 Gui 1:Add, UpDown, vQuality Range1-63, 4
 Gui 1:Add, Text, y+-18 x+5, Quality. 12 for gifs, 4 for video
@@ -35,11 +31,8 @@ Gui 1:Add, Text, y+-18 x+5, Rate. 500 for gifs, 1500 for video
 Gui 1:Add, Checkbox, x15 y+15 gSizebox vDoUWant2Size, Resize by width
 Gui 1:Add, Edit, x15 w80
 Gui 1:Add, UpDown, vWidth Range2-2048, 720
-
 Gui 1:Add, Checkbox, x15 y+30 gSoundCheck vGoingon4chan, Enable sound
-
 Gui 1:Add, Button, x15 y+20 gConvert, Convert
-
 GuiControl, Text, Filenamedisplay, %origin%
 Gui 1:Show,,oh wow you cant be this lazy
 Return
@@ -62,7 +55,7 @@ if Sizechecked = 0
 	GuiControl, -ReadOnly, DoUWant2Size
 Return
 
-; Jesus fuck this is horrible, don't tell anyone you saw this
+; Jesus fuck this is horrible, don't tell anyone you saw this - Seriously
 DisableEditOnResize:
 GuiControl, +ReadOnly, DoUWant2Size
 Return
@@ -80,7 +73,6 @@ if Cropchecked = 0
 	Gosub EnableEditsOnCrop
 Return
 
-; Jesus fuck this is horrible, don't tell anyone you saw this
 DisableEditsOnCrop:
 GuiControl, +ReadOnly, StartTime
 GuiControl, +ReadOnly, EndTime
@@ -136,7 +128,6 @@ Sleep 10
 gosub DisableEditsOnCrop
 gosub EnableEditsOnCrop
 Return
-
 
 ErrorExit:
 MsgBox, You didn't select a folder!
