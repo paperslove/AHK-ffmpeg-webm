@@ -15,6 +15,7 @@ croppingS = %null%
 croppingE = %null%
 widening = %null%
 sound = %null%
+outputname = %null%
 FileRead ffmpeg, ~settings.tmp
 
 Gui 1:Add, Edit, r1 w275 y10 vFilenamedisplay, abcdefghijklmnopqrstuvwxyz0123456789 %origin%
@@ -107,6 +108,7 @@ FatCheck:
 GuiControlGet, Sizechecked,, DoUWant2Size
 if Sizechecked = 1
 	{
+		width = 720
 		widening = -vf scale=%width%:-1
 	} else 
 	widening = %null%
@@ -117,7 +119,13 @@ Gosub SoundCheck
 Gosub FatCheck
 Gui 1:Submit, NoHide
 gosub cropfix
-Run %ffmpeg% -i "%origin%" %croppingS% %croppingE% -c:v libvpx -crf %quality% -b:v %rate%K %widening% %sound% output.webm
+Gosub namefix
+Run %ffmpeg% -i "%origin%" %croppingS% %croppingE% -c:v libvpx -crf %quality% -b:v %rate%K %widening% %sound% "%outputnamefixed%.webm"
+Return
+
+namefix:
+outputname = %origin%
+SplitPath, outputname,,,,outputnamefixed,
 Return
 
 cropfix:
